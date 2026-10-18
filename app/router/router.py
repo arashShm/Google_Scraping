@@ -9,8 +9,7 @@ router = APIRouter()
 
 
 @router.get("/image")
-async def image_tab():
-    google_address = os.getenv("GOOGLE_ADDRESS")
-    scraped = GoogleImageScraper()
-    g = scraped.image()
-    return g
+async def get_image_tab(query : str):
+    image_tab_html = GoogleImageScraper(query)
+    image = image_tab_html.get_google_html_tab()
+    return image
