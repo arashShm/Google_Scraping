@@ -8,7 +8,8 @@ class GoogleImageScraper:
 
     def get_google_html_tab(self):
         params = {
-            "q" : self.query
+            "q" : self.query,
+            "tbm" : "isch"
         }
         response = requests.get(self.google_address , params=params)
         response.raise_for_status()
