@@ -1,9 +1,21 @@
 from app.database.connect import MysqlConnect
 
 class GetCookies:
-    mysql = MysqlConnect()
+    def __init__(self):
+        self.connection = MysqlConnect()
 
-    mysql.cur.execute("SELECT * FROM cookies")
-    rows = mysql.cur.fetchall()
+    def get_cookies(self):
+        try : 
+            query = "SELECT id, cookie, counter FROM cookies ORDER BY counter ASC"
+            self.connection.cur.execute(query)
+            cookies = self.connection.cur.fetchall()
+            return cookies
+        
+        except Exception as e:
+            print("Cookie fetching for session error:", e)
+            return None
+            
+        finally:
+            self.connection.cur.close()
+            self.connection.db.close()
 
-    print(rows)

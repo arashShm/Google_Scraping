@@ -11,7 +11,7 @@ class GoogleImageScraper:
             "q" : self.query,
             "tbm" : "isch"
         }
-        response = requests.get(self.google_address , params=params)
+        response = requests.get(url = self.google_address , params=params)
         response.raise_for_status()
 
         return response.text
